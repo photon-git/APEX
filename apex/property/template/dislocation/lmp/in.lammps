@@ -1,0 +1,51 @@
+clear
+units metal
+dimension 3
+boundary p p p
+atom_style atomic
+
+######################################
+# ATOM DEFINITION
+read_data conf.lmp extra/atom/types 1
+
+######################################
+include potential.mod
+
+neighbor 2 bin
+neigh_modify delay 5#variable Ni equal 1
+
+variable centerx equal ${px}
+variable centery equal ${py}
+variable rdisk equal ${py}-30    
+variable redge equal ${py}-5
+
+# DEFINE compute region
+region r1 cylinder z ${centerx} ${centery} ${rdisk} INF INF
+region r2 cylinder z ${centerx} ${centery} ${redge} INF INF 
+group mobile region r1
+group big_disk region r2
+set group mobile type 1
+group edge subtract big_disk mobile
+group delete subtract all big_disk
+group fixed subtract all mobile
+set group fixed type 2
+delete_atoms group delete
+
+# EQUILIBRATION
+reset_timestep 0
+timestep 0.001
+velocity fixed set 0 0 0
+fix 0 fixed setforce 0 0 0
+min_style cg
+minimize 1e-25 1e-25 500 5000
+reset_timestep 0
+fix 2 mobile nvt temp 10 10 0.1
+
+######################################
+dump 1 all custom 50 dump.relax id type x y z  
+# Display thermo
+thermo 20
+run 0
+write_data tmp_data
+######################################
+print "All done"

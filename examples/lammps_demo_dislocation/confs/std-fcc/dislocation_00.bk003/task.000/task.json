@@ -1,0 +1,21 @@
+{
+    "type": "dislocation",
+    "skip": false,
+    "lattice_type": "fcc",
+    "c11": 169.8811,
+    "c12": 122.6042,
+    "c44": 76.1899,
+    "dislocation_type": "screw",
+    "theta": [
+        30,
+        60
+    ],
+    "gamma_isf": 0.41,
+    "reproduce": false,
+    "cal_type": "relaxation",
+    "cal_setting": {
+        "relax_pos": true,
+        "relax_shape": true,
+        "relax_vol": false
+    }
+}

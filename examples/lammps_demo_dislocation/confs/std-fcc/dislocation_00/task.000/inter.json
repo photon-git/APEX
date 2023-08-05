@@ -1,0 +1,7 @@
+{
+    "type": "eam_alloy",
+    "model": "Cu01.eam.alloy",
+    "type_map": {
+        "Cu": 0
+    }
+}

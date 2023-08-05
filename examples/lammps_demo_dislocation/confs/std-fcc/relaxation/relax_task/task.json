@@ -1,0 +1,12 @@
+{
+    "cal_setting": {
+        "etol": 0,
+        "ftol": 1e-10,
+        "maxiter": 5000,
+        "maximal": 500000,
+        "relax_pos": true,
+        "relax_shape": true,
+        "relax_vol": true
+    },
+    "cal_type": "relaxation"
+}
